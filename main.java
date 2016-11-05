@@ -1,16 +1,19 @@
 import java.util.*;
 import java.net.*;
 import java.io.*;
-class main{
+public class main{
     public static void main(String[] args){
         List<String> links = new ArrayList<>();
         links.add("Main_Page");
+        //Node origin=new Node("Main_Page");
+        List<Integer> topLinks=new ArrayList<>();
         for(int po=0;po<links.size();po++){
               URL url;
               InputStream is=null;
               BufferedReader br;
               String line;
               List<String> lines=new ArrayList<>();
+              int linksadded=0;
               try {
                   url = new URL("https://en.wikipedia.org/wiki/"+links.get(po));
                   is = url.openStream();  // throws an IOException
@@ -31,7 +34,7 @@ class main{
 
                   }
               }
-              System.out.println(lines.size());
+              //System.out.println(lines.size());
           for(int i=0;i<lines.size();i++){
             for(int j=0;j<lines.get(i).length()-25;j++){
               if(lines.get(i).substring(j,j+15).equals("<a href=\"/wiki/")
@@ -48,10 +51,22 @@ class main{
                 }
                 if(!links.contains(lines.get(i).substring(j+15,end))){
                   links.add(lines.get(i).substring(j+15,end));
-                  System.out.println("Link to "+lines.get(i).substring(j+15,end));
+                  linksadded++;
+                  //origin.addEdge(new Node(links.get(1)));
+                  //System.out.println("Link to "+lines.get(i).substring(j+15,end));
                 }
               }
             }
+          }
+          topLinks.add(linksadded);
+          boolean test=true;
+          for(int i=1;i<topLinks.size();i++){
+            if(topLinks.get(i-1)>linksadded){
+              test=false;
+            }
+          }
+          if(test){
+            System.out.println(links.get(po)+" has "+linksadded+" links (searched "+((float)po/(float)links.size())+"%)");
           }
         }
     }
