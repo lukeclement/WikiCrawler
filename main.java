@@ -9,6 +9,7 @@ public class main{
         int record=1;
         String fileName="links.txt";
         String fileNameTwo="number.txt";
+        String fileNameThree="index.txt";
         String lining=null;
         int current=0;
         try{
@@ -92,6 +93,10 @@ public class main{
                     PrintWriter print_line = new PrintWriter(write);
                     print_line.printf( "%s" + "%n" , lines.get(i).substring(j+15,end));
                     print_line.close();
+                    FileWriter writerr = new FileWriter(fileNameThree, true);
+                    PrintWriter print_linerr = new PrintWriter(writerr);
+                    print_linerr.printf( "%s" + "%n" , lines.get(i).substring(j+15,end)+" from "+links.get(po));
+                    print_linerr.close();
                   }catch(Exception ex){}
                   linksadded++;
                   //origin.addEdge(new Node(links.get(1)));
@@ -110,7 +115,7 @@ public class main{
           if(test){
             System.out.println(links.get(po)+" has "+linksadded+" links (searched "+((float)po*100/(float)links.size())+"%)");
           }
-
+          System.out.println("Searched "+po+" links (just finished on "+links.get(po)+", added "+linksadded+" links) out of a total of "+links.size()+" links");
         }
     }
 }
