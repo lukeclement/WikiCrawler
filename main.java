@@ -12,6 +12,7 @@ public class main{
         String fileNameThree="index.txt";
         String lining=null;
         int current=0;
+        float percentTwo=0;
         try{
           FileReader fileReader = new FileReader(fileName);
           BufferedReader br=new BufferedReader(fileReader);
@@ -82,10 +83,10 @@ public class main{
                   end++;
                 }
                 if(!links.contains(lines.get(i).substring(j+15,end))){
-                  if(show==record){
-                    record=show*2;
+                  //if(show==record){
+                    //record=show*2;
                     //System.out.println("Found "+show+" entries, currently searching link number "+po+" ("+links.get(po)+")");
-                  }
+                  //}
                   show++;
                   links.add(lines.get(i).substring(j+15,end));
                   try{
@@ -105,7 +106,7 @@ public class main{
               }
             }
           }
-          topLinks.add(linksadded);
+          /*topLinks.add(linksadded);
           boolean test=true;
           for(int i=1;i<topLinks.size();i++){
             if(topLinks.get(i-1)>linksadded){
@@ -114,8 +115,9 @@ public class main{
           }
           if(test){
             System.out.println(links.get(po)+" has "+linksadded+" links (searched "+((float)po*100/(float)links.size())+"%)");
-          }
-          System.out.println("Searched "+po+" links (just finished on "+links.get(po)+", added "+linksadded+" links) out of a total of "+links.size()+" links");
+          }*/
+          float percentOne=(float)po*100/(float)links.size();
+          System.out.println(percentOne+"% Searched "+po+" links (just finished on "+links.get(po)+", added "+linksadded+" links) out of a total of "+links.size()+" links");
         }
     }
 }
